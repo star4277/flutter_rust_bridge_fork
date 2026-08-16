@@ -50,6 +50,9 @@ proc-macro2 = { version = "1.0.66", features = ["span-locations"] }
 include_dir = "0.7.3"
 indicatif = "0.18.0"
 indicatif-log-bridge = "0.2.3"
+# Already in the tree via indicatif; declared explicitly for reading single
+# keypresses in `frb run`.
+console = "0.16.0"
 notify = "6.1.1"
 notify-debouncer-mini = "0.4.1"
 cargo_toml = "0.21.0"

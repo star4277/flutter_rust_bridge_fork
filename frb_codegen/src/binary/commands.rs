@@ -33,6 +33,9 @@ pub(crate) enum Commands {
     /// Compile for the Web (WASM)
     BuildWeb(BuildWebCommandArgs),
 
+    /// Run the app, rebuilding Rust and restarting the process on changes
+    Run(RunCommandArgs),
+
     /// Generate internally used code
     #[clap(hide = true)]
     InternalGenerate(InternalGenerateCommandArgs),
@@ -346,6 +349,30 @@ pub(crate) struct BuildWebCommandArgs {
 
 #[derive(Debug, Args)]
 pub(crate) struct InternalGenerateCommandArgs {}
+
+#[derive(Debug, Args, Default)]
+pub(crate) struct RunCommandArgs {
+    /// Path to a YAML config file, otherwise auto-detected the same way
+    /// `generate` does.
+    #[arg(long)]
+    pub config_file: Option<String>,
+
+    /// Device id, forwarded to `flutter run -d`
+    #[arg(short = 'd', long)]
+    pub device_id: Option<String>,
+
+    /// Skip the `cargo check` gate before restarting the app
+    #[arg(long)]
+    pub no_check: bool,
+
+    /// Skip fvm installation
+    #[clap(long)]
+    pub skip_fvm_install: bool,
+
+    /// Extra arguments forwarded verbatim to `flutter run`
+    #[arg(trailing_var_arg = true, allow_hyphen_values = true)]
+    pub flutter_args: Vec<String>,
+}
 
 impl From<TemplateArg> for Template {
     fn from(value: TemplateArg) -> Self {

@@ -642,6 +642,7 @@ dependencies = [
  "cbindgen",
  "chrono",
  "clap",
+ "console",
  "convert_case",
  "derivative",
  "enum-iterator",

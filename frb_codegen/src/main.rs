@@ -64,6 +64,13 @@ fn main_given_cli(cli: Cli) -> anyhow::Result<()> {
             args.args,
             FvmInstallMode::from_skip_fvm_install(args.skip_fvm_install),
         )?,
+        Commands::Run(args) => run::run(run::RunConfig {
+            config_file: args.config_file,
+            device_id: args.device_id,
+            flutter_args: args.flutter_args,
+            no_check: args.no_check,
+            fvm_install_mode: FvmInstallMode::from_skip_fvm_install(args.skip_fvm_install),
+        })?,
         Commands::InternalGenerate(_args) => internal::generate()?,
     }
     Ok(())

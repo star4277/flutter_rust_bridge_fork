@@ -7,4 +7,5 @@ pub mod integration;
 #[doc(hidden)]
 pub mod internal;
 pub mod misc;
+pub mod run;
 pub mod utils;
